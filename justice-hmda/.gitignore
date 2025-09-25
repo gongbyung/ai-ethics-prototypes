@@ -1,0 +1,42 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# ----------------------------
+# Jupyter
+# ----------------------------
+.ipynb_checkpoints/
+jupyter_cache/
+
+# ----------------------------
+# Data
+# ----------------------------
+data/raw/
+data/interim/
+*.csv
+*.xlsx
+*.parquet
+*.zip
+
+# ----------------------------
+# Outputs
+# ----------------------------
+outputs/figures/
+outputs/tables/
+*.png
+*.pdf
+
+# ----------------------------
+# Environments
+# ----------------------------
+.env
+.venv/
+venv/
+ENV/
+env.bak/
