@@ -42,6 +42,7 @@ justice-hmda/
 ├── requirements.txt       # dependencies
 ├── workflow.png           # pipeline diagram
 └── README.md              # this file
+```
 
 ---
 
@@ -104,4 +105,5 @@ This project uses **public HMDA data** (download from [CFPB HMDA Portal](https:/
 
 **Status:** Prototype (MVP)  
 **Author:** Alex Kim  
+
 
