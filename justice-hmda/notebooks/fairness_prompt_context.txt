@@ -1,0 +1,105 @@
+
+
+Model setup:
+- Target: approved (1 = approved, 0 = denied)
+- Data: 2022 California HMDA (265k clean loans)
+- Train/test split: 70/30, stratified by approval outcome
+- Excluded leakage variables: interest_rate, rate_spread, denial_reason_*, purchaser_*, hoepa_status, etc.
+
+Key features:
+- income_ratio: borrower income relative to loan size
+- loan_to_value_ratio: how leveraged the borrower is
+- dti_clean: debt-to-income ratio
+- loan_term, occupancy_type, property_value, total_units
+- co_applicant_* demographic fields
+- race_group_* indicators (White as baseline)
+
+Top features (XGBoost importance):
+dti_clean, income_ratio, loan_to_value_ratio, co_applicant_race_observed
+
+
+
+Context:
+Research by William Apgar et al. (Harvard JCHS, 2007) found that the mortgage market is segmented,
+with African-American and Hispanic borrowers more likely to receive loans through less-regulated,
+higher-priced channels — often outside CRA oversight. These structural patterns may contribute to
+observed approval and pricing disparities, even when controlling for credit risk factors.
+
+
+
+Model Performance:
+- Logistic Regression ROC-AUC: 0.740
+- XGBoost ROC-AUC: 0.795
+
+
+Here are fairness metrics from two mortgage approval models (Logistic Regression and XGBoost):
+
+### Logistic Regression ###
+=== Approval Rates by Race Group ===
+race_group_original
+American Indian or Alaska Native    0.806
+Asian                               0.813
+Black or African American           0.503
+Hispanic or Latino                  0.714
+Pacific Islander                    0.704
+White                               0.830
+
+=== Disparate Impact Ratios (vs White) ===
+race_group_original
+American Indian or Alaska Native    0.971
+Asian                               0.979
+Black or African American           0.605
+Hispanic or Latino                  0.859
+Pacific Islander                    0.848
+White                               1.000
+
+=== Error Rates (FNR / FPR) ===
+                                    FNR    FPR
+race_group_original                           
+American Indian or Alaska Native  0.157  0.583
+Asian                             0.152  0.485
+Black or African American         0.459  0.266
+Hispanic or Latino                0.249  0.390
+Pacific Islander                  0.226  0.143
+White                             0.140  0.494
+
+
+---
+
+### XGBoost ###
+=== Approval Rates by Race Group ===
+race_group_original
+American Indian or Alaska Native    0.783
+Asian                               0.863
+Black or African American           0.649
+Hispanic or Latino                  0.805
+Pacific Islander                    0.772
+White                               0.876
+
+=== Disparate Impact Ratios (vs White) ===
+race_group_original
+American Indian or Alaska Native    0.893
+Asian                               0.985
+Black or African American           0.741
+Hispanic or Latino                  0.919
+Pacific Islander                    0.882
+White                               1.000
+
+=== Error Rates (FNR / FPR) ===
+                                    FNR    FPR
+race_group_original                           
+American Indian or Alaska Native  0.143  0.333
+Asian                             0.094  0.461
+Black or African American         0.296  0.303
+Hispanic or Latino                0.149  0.406
+Pacific Islander                  0.143  0.095
+White                             0.087  0.468
+
+
+Please provide a structured analysis using the Belmont Report principles:
+- Respect for Persons
+- Beneficence
+- Justice
+
+Also include System 1 (fast detector) and System 2 (slow adjudicator) reasoning,
+linking patterns in the data to potential systemic causes and governance implications.

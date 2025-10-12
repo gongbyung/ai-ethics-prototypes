@@ -1,0 +1,374 @@
+[
+  {
+    "model_name": "Logistic Regression",
+    "data_info": {
+      "years": [
+        2022
+      ],
+      "states": [
+        "CA"
+      ],
+      "loanTypes": [
+        "Conventional:First Lien",
+        "FHA:First Lien",
+        "VA:First Lien",
+        "Conventional:Subordinate Lien",
+        "FSA/RHS:First Lien",
+        "FSA/RHS:Subordinate Lien"
+      ],
+      "propertyTypes": [
+        "Single Family (1-4 Units):Site-Built",
+        "Single Family (1-4 Units):Manufactured"
+      ],
+      "occupancyTypes": [
+        1,
+        2,
+        3
+      ],
+      "lienStatuses": [
+        "C",
+        "NC",
+        "U"
+      ],
+      "loan_purposes": [
+        1
+      ]
+    },
+    "performance": {
+      "accuracy": 0.9754323623023532,
+      "roc_auc": 0.9973295843192701
+    },
+    "approval_rates": {
+      "American Indian or Alaska Native": 0.9483568075117371,
+      "Asian": 0.9386657101865137,
+      "Black or African American": 0.9329351072495249,
+      "Hispanic or Latino": 0.9543488707352235,
+      "Pacific Islander": 0.9507389162561576,
+      "White": 0.9451426024955437
+    },
+    "disparate_impact": {
+      "American Indian or Alaska Native": 1.0034007619672487,
+      "Asian": 0.9931471798097679,
+      "Black or African American": 0.9870839646696844,
+      "Hispanic or Latino": 1.009740612914254,
+      "Pacific Islander": 1.0059211316322398,
+      "White": 1.0
+    },
+    "error_rates": {
+      "American Indian or Alaska Native": {
+        "FNR": 0.0194,
+        "FPR": 0.0
+      },
+      "Asian": {
+        "FNR": 0.0314,
+        "FPR": 0.0115
+      },
+      "Black or African American": {
+        "FNR": 0.0141,
+        "FPR": 0.005
+      },
+      "Hispanic or Latino": {
+        "FNR": 0.0139,
+        "FPR": 0.0
+      },
+      "Pacific Islander": {
+        "FNR": 0.0203,
+        "FPR": 0.0
+      },
+      "White": {
+        "FNR": 0.0236,
+        "FPR": 0.0096
+      }
+    },
+    "top_features": [
+      {
+        "feature": "hoepa_status",
+        "importance": -4.380932096249668
+      },
+      {
+        "feature": "lender_credits",
+        "importance": 3.16231071201996
+      },
+      {
+        "feature": "origination_charges",
+        "importance": 3.0354067031643384
+      },
+      {
+        "feature": "co-applicant_sex_observed",
+        "importance": -1.1527990129607557
+      },
+      {
+        "feature": "discount_points",
+        "importance": -0.9385077432660903
+      },
+      {
+        "feature": "aus-1",
+        "importance": 0.8923868162530102
+      },
+      {
+        "feature": "occupancy_type",
+        "importance": 0.7590905745909465
+      },
+      {
+        "feature": "construction_method",
+        "importance": -0.7176048160842158
+      },
+      {
+        "feature": "co-applicant_ethnicity_observed",
+        "importance": 0.6836519874389606
+      },
+      {
+        "feature": "manufactured_home_land_property_interest",
+        "importance": -0.6389407127387652
+      }
+    ]
+  },
+  {
+    "model_name": "Random Forest",
+    "data_info": {
+      "years": [
+        2022
+      ],
+      "states": [
+        "CA"
+      ],
+      "loanTypes": [
+        "Conventional:First Lien",
+        "FHA:First Lien",
+        "VA:First Lien",
+        "Conventional:Subordinate Lien",
+        "FSA/RHS:First Lien",
+        "FSA/RHS:Subordinate Lien"
+      ],
+      "propertyTypes": [
+        "Single Family (1-4 Units):Site-Built",
+        "Single Family (1-4 Units):Manufactured"
+      ],
+      "occupancyTypes": [
+        1,
+        2,
+        3
+      ],
+      "lienStatuses": [
+        "C",
+        "NC",
+        "U"
+      ],
+      "loan_purposes": [
+        1
+      ]
+    },
+    "performance": {
+      "accuracy": 0.9971239758158322,
+      "roc_auc": 0.999919831278003
+    },
+    "approval_rates": {
+      "American Indian or Alaska Native": 0.9624413145539906,
+      "Asian": 0.9657261278495138,
+      "Black or African American": 0.9424382297040456,
+      "Hispanic or Latino": 0.9656415185007208,
+      "Pacific Islander": 0.9704433497536946,
+      "White": 0.9647727272727272
+    },
+    "disparate_impact": {
+      "American Indian or Alaska Native": 0.9975834591372341,
+      "Asian": 1.0009882126119813,
+      "Black or African American": 0.9768499907415313,
+      "Hispanic or Latino": 1.0009005138758944,
+      "Pacific Islander": 1.0058776770120745,
+      "White": 1.0
+    },
+    "error_rates": {
+      "American Indian or Alaska Native": {
+        "FNR": 0.0049,
+        "FPR": 0.0
+      },
+      "Asian": {
+        "FNR": 0.003,
+        "FPR": 0.0
+      },
+      "Black or African American": {
+        "FNR": 0.0037,
+        "FPR": 0.0
+      },
+      "Hispanic or Latino": {
+        "FNR": 0.0022,
+        "FPR": 0.0
+      },
+      "Pacific Islander": {
+        "FNR": 0.0,
+        "FPR": 0.0
+      },
+      "White": {
+        "FNR": 0.0029,
+        "FPR": 0.0
+      }
+    },
+    "top_features": [
+      {
+        "feature": "hoepa_status",
+        "importance": 0.4367299982541904
+      },
+      {
+        "feature": "origination_charges",
+        "importance": 0.20134770838121535
+      },
+      {
+        "feature": "total_loan_costs",
+        "importance": 0.19359369196225976
+      },
+      {
+        "feature": "discount_points",
+        "importance": 0.06326200090314443
+      },
+      {
+        "feature": "lender_credits",
+        "importance": 0.04760990342063599
+      },
+      {
+        "feature": "initially_payable_to_institution",
+        "importance": 0.008170020957643834
+      },
+      {
+        "feature": "tract_owner_occupied_units",
+        "importance": 0.004451148603220569
+      },
+      {
+        "feature": "tract_minority_population_percent",
+        "importance": 0.0038757645893694372
+      },
+      {
+        "feature": "tract_one_to_four_family_homes",
+        "importance": 0.003762207308376481
+      },
+      {
+        "feature": "occupancy_type",
+        "importance": 0.002787906077393085
+      }
+    ]
+  },
+  {
+    "model_name": "XGBoost",
+    "data_info": {
+      "years": [
+        2022
+      ],
+      "states": [
+        "CA"
+      ],
+      "loanTypes": [
+        "Conventional:First Lien",
+        "FHA:First Lien",
+        "VA:First Lien",
+        "Conventional:Subordinate Lien",
+        "FSA/RHS:First Lien",
+        "FSA/RHS:Subordinate Lien"
+      ],
+      "propertyTypes": [
+        "Single Family (1-4 Units):Site-Built",
+        "Single Family (1-4 Units):Manufactured"
+      ],
+      "occupancyTypes": [
+        1,
+        2,
+        3
+      ],
+      "lienStatuses": [
+        "C",
+        "NC",
+        "U"
+      ],
+      "loan_purposes": [
+        1
+      ]
+    },
+    "performance": {
+      "accuracy": 0.9992969718660923,
+      "roc_auc": 0.9999664842888328
+    },
+    "approval_rates": {
+      "American Indian or Alaska Native": 0.9671361502347418,
+      "Asian": 0.968356448270365,
+      "Black or African American": 0.9454249253326092,
+      "Hispanic or Latino": 0.9678039404132629,
+      "Pacific Islander": 0.9704433497536946,
+      "White": 0.9674242424242424
+    },
+    "disparate_impact": {
+      "American Indian or Alaska Native": 0.9997022069771803,
+      "Asian": 1.0009635957062506,
+      "Black or African American": 0.9772599071566517,
+      "Hispanic or Latino": 1.0003924834342264,
+      "Pacific Islander": 1.0031207687352208,
+      "White": 1.0
+    },
+    "error_rates": {
+      "American Indian or Alaska Native": {
+        "FNR": 0.0,
+        "FPR": 0.0
+      },
+      "Asian": {
+        "FNR": 0.0006,
+        "FPR": 0.0076
+      },
+      "Black or African American": {
+        "FNR": 0.0006,
+        "FPR": 0.0
+      },
+      "Hispanic or Latino": {
+        "FNR": 0.0,
+        "FPR": 0.0
+      },
+      "Pacific Islander": {
+        "FNR": 0.0,
+        "FPR": 0.0
+      },
+      "White": {
+        "FNR": 0.0005,
+        "FPR": 0.0083
+      }
+    },
+    "top_features": [
+      {
+        "feature": "hoepa_status",
+        "importance": 0.4784415066242218
+      },
+      {
+        "feature": "origination_charges",
+        "importance": 0.15426351130008698
+      },
+      {
+        "feature": "total_loan_costs",
+        "importance": 0.11523023247718811
+      },
+      {
+        "feature": "occupancy_type",
+        "importance": 0.11186570674180984
+      },
+      {
+        "feature": "total_points_and_fees",
+        "importance": 0.06430941075086594
+      },
+      {
+        "feature": "open-end_line_of_credit",
+        "importance": 0.01905454881489277
+      },
+      {
+        "feature": "lien_status",
+        "importance": 0.016019439324736595
+      },
+      {
+        "feature": "discount_points",
+        "importance": 0.007943900302052498
+      },
+      {
+        "feature": "lender_credits",
+        "importance": 0.005768462549895048
+      },
+      {
+        "feature": "business_or_commercial_purpose",
+        "importance": 0.0034566307440400124
+      }
+    ]
+  }
+]
