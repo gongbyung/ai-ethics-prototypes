@@ -1,0 +1,13 @@
+echo "venv/
+*/venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+data/raw/
+data/interim/
+data/processed/
+outputs/
+*.pt
+*.bin
+*.h5
+" > .gitignore
