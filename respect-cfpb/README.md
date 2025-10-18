@@ -54,6 +54,37 @@ cfpb-nlp-risk-watchdog/
 ```
 ---
 
+## Methodology
+
+### 1. Exploratory Data Analysis (EDA)
+- Clean and standardize CFPB mortgage complaints (2024, ~12K)
+- Remove/redact tokens (e.g., “XXXX”), normalize text/casing, standardize company/issue names
+- Compute narrative length stats; inspect outliers
+- Plot volume by month, issue, and company
+
+### 2. Theme Extraction
+- **BERTopic** with **FinBERT embeddings**
+- Produce interpretable clusters (e.g., *Escrow errors*, *Payment delays*, *Foreclosure issues*)
+- Track topic frequency and growth as early-warning signals
+
+### 3. Risk Labeling
+- Binary target from company response:
+  - **1 = Risk** → “Closed with monetary relief” or “Closed with non-monetary relief”
+  - **0 = No Risk** → all other outcomes
+
+### 4. Risk Classification
+- Fine-tune **FinBERT** with **LoRA (PEFT)** for efficient adaptation
+- Task: predict `risk_flag` from cleaned narrative
+- Split: 80/20 stratified train–test
+- Metrics: **Precision**, **Recall**, **F1**, **ROC-AUC**
+
+### 5. Monitoring & Early Warning
+- Score new complaints → `risk_score` (0–1) and map to `topic`
+- Aggregate by company/issue/geography; surface hotspots
+- Dashboard for trend tracking and analyst triage
+
+---
+
 ## Data
 
 This project uses **public CFPB complaint data**, retrieved via the official API:
