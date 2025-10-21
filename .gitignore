@@ -3,10 +3,12 @@ echo "venv/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+data/
 data/raw/
 data/interim/
 data/processed/
 outputs/
+.env
 *.pt
 *.bin
 *.h5
