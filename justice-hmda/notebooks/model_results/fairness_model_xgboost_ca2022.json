@@ -1,0 +1,53 @@
+{
+  "model_name": "xgboost_fairness_audit_ca2022",
+  "objective": "Evaluate model-predicted approval disparities by race using a tree-based gradient boosting model trained on 2022 California HMDA mortgage data.",
+  "methodology": "XGBoost binary classifier trained on preprocessed HMDA data with 'approved' as the target variable (1=approved/originated, 0=denied). Independent variables include core creditworthiness factors \u2014loan_amount, loan_term, loan_to_value_ratio, income_ratio, and dti_clean\u2014plus race-group dummy variables (White as the reference group). Numeric features were median-imputed and standardized. Hyperparameters were tuned to reduce overfitting and improve generalization (max_depth=4, learning_rate=0.03, n_estimators=500, subsample=0.8, colsample_bytree=0.8).",
+  "data_source": "../data/processed/hmda_ca2022_train.csv",
+  "test_data_source": "../data/processed/hmda_ca2022_test.csv",
+  "train_accuracy": 0.9067,
+  "test_accuracy": 0.9039,
+  "train_auc": 0.786,
+  "test_auc": 0.7586,
+  "train_log_loss": 0.4882,
+  "test_log_loss": 0.4918,
+  "timestamp": "2025-10-29T15:41:23.909851",
+  "fairness_summary": {
+    "American Indian or Alaska Native": {
+      "approval_rate": 0.823,
+      "disparate_impact_vs_white": 0.885,
+      "false_negative_rate": 0.126,
+      "false_positive_rate": 0.385
+    },
+    "Asian": {
+      "approval_rate": 0.908,
+      "disparate_impact_vs_white": 0.976,
+      "false_negative_rate": 0.057,
+      "false_positive_rate": 0.533
+    },
+    "Black or African American": {
+      "approval_rate": 0.659,
+      "disparate_impact_vs_white": 0.709,
+      "false_negative_rate": 0.296,
+      "false_positive_rate": 0.384
+    },
+    "Hispanic or Latino": {
+      "approval_rate": 0.88,
+      "disparate_impact_vs_white": 0.946,
+      "false_negative_rate": 0.07,
+      "false_positive_rate": 0.444
+    },
+    "Pacific Islander": {
+      "approval_rate": 0.931,
+      "disparate_impact_vs_white": 1.002,
+      "false_negative_rate": 0.042,
+      "false_positive_rate": 0.5
+    },
+    "White": {
+      "approval_rate": 0.929,
+      "disparate_impact_vs_white": 1.0,
+      "false_negative_rate": 0.044,
+      "false_positive_rate": 0.561
+    }
+  },
+  "notes": "Disparate impact ratios (DI) measure relative approval rates by race versus White applicants. Values below 0.80 indicate potential adverse impact under EEOC standards. Model results show that while most groups remain near parity (DI ~0.9\u20131.0), the Black or African American subgroup exhibits lower relative approval (DI \u2248 0.71), suggesting potential disparate impact. False negative rate disparities indicate higher denial likelihood for this subgroup. Model generalizes well between training and testing data (ROC-AUC gap <0.03), indicating stable fairness performance under out-of-sample evaluation."
+}

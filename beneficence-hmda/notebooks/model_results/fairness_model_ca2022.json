@@ -1,0 +1,50 @@
+{
+  "model_name": "explicit_credit_fairness_regression",
+  "objective": "Estimate conditional differences in mortgage rate spreads by race, controlling only for core creditworthiness indicators.",
+  "methodology": "Ordinary Least Squares (OLS) regression trained on approved conventional loans from the 2022 HMDA California dataset. The model predicts 'rate_spread'\u2014the difference between the loan rate and a benchmark\u2014using borrower credit-relevant variables only: loan amount, loan term, loan-to-value ratio (LTV), income ratio, and debt-to-income ratio (DTI). Process and institutional factors such as AUS access, submission channel, and lender size are intentionally excluded to isolate disparities linked to borrower credit profiles rather than structural or procedural effects. Race dummies capture conditional differences relative to White borrowers (reference group). Negative coefficients indicate lower predicted rates; positive coefficients indicate higher predicted rates, holding credit characteristics constant.",
+  "data_source": "../data/processed/hmda_ca2022_rate_test.csv",
+  "r2": 0.1502,
+  "rmse": 0.6442,
+  "race_effects": {
+    "Asian": -0.045575761711154184,
+    "Black or African American": -0.02917494614136088,
+    "Hispanic or Latino": -0.010319391622078284,
+    "White": 0.004810709960523925,
+    "Pacific Islander": 0.023601115615572744,
+    "American Indian or Alaska Native": 0.05665827389849666
+  },
+  "timestamp": "2025-10-28T12:22:00.276352",
+  "notes": "Trained only on credit-related variables to ensure interpretability and procedural fairness. Numeric fields standardized; missing values imputed with median. Excluded location, lender, and product identifiers to prevent proxy bias. Reference group: White borrowers.",
+  "residual_summary": {
+    "American Indian or Alaska Native": {
+      "mean": -0.1587,
+      "std": 0.7584,
+      "count": 90
+    },
+    "Asian": {
+      "mean": 0.0099,
+      "std": 0.6515,
+      "count": 12377
+    },
+    "Black or African American": {
+      "mean": 0.01,
+      "std": 0.7353,
+      "count": 1250
+    },
+    "Hispanic or Latino": {
+      "mean": -0.0053,
+      "std": 0.6757,
+      "count": 1801
+    },
+    "Pacific Islander": {
+      "mean": -0.0557,
+      "std": 0.5807,
+      "count": 88
+    },
+    "White": {
+      "mean": 0.0005,
+      "std": 0.6302,
+      "count": 20063
+    }
+  }
+}

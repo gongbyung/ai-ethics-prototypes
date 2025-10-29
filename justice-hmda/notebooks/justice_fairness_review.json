@@ -1,0 +1,116 @@
+{
+  "timestamp": "2025-10-29T15:04:35.900867",
+  "api_model": "openai/gpt-4o-mini",
+  "ethical_framework": "Belmont Report",
+  "prompt": {
+    "system_message": "You are an AI Ethics Officer analyzing fairness, bias, and systemic risk in automated decision systems.\n\nEthical foundation:\n\u2022 Respect for Persons \u2014 protect autonomy, consent, and dignity.\n\u2022 Beneficence \u2014 maximize benefits, minimize harm.\n\u2022 Justice \u2014 ensure fair distribution of risks and rewards.\n\nPhilosophical anchor: Kantian duty ethics \u2014 uphold principles even when outcomes are uncertain,\nand never treat people as tools. Respond as if briefing a policy audience \u2014 clear, grounded, and ethically informed.",
+    "user_prompt": "Model setup:\n- Target: approved (1 = approved, 0 = denied)\n- Data: 2022 California HMDA (265k clean loans)\n- Train/test split: 70/30, stratified by approval outcome\n- Excluded leakage variables: interest_rate, rate_spread, denial_reason_*, purchaser_*, hoepa_status, etc.\n\nKey features:\n- income_ratio: borrower income relative to loan size\n- loan_to_value_ratio: how leveraged the borrower is\n- dti_clean: debt-to-income ratio\n- loan_term, occupancy_type, property_value, total_units\n- co_applicant_* demographic fields\n- race_group_* indicators (White as baseline)\n\n\n\nContext:\nResearch by William Apgar et al. (Harvard JCHS, 2007) found that the mortgage market is segmented,\nwith African-American and Hispanic borrowers more likely to receive loans through less-regulated,\nhigher-priced channels \u2014 often outside CRA oversight. These structural patterns may contribute to\nobserved approval and pricing disparities, even when controlling for credit risk factors.\n\n\n\nModel Performance:\n- Logistic Regression ROC-AUC: 0.711\n- XGBoost ROC-AUC: 0.750\n\n\nHere are structured fairness metrics from two mortgage approval models (Logistic Regression and XGBoost):\n\n{\n  \"Logistic Regression\": {\n    \"approval_rates\": {\n      \"American Indian or Alaska Native\": 0.468,\n      \"Asian\": 0.628,\n      \"Black or African American\": 0.54,\n      \"Hispanic or Latino\": 0.541,\n      \"Pacific Islander\": 0.539,\n      \"White\": 0.616\n    },\n    \"disparate_impact\": {\n      \"American Indian or Alaska Native\": 0.76,\n      \"Asian\": 1.019,\n      \"Black or African American\": 0.877,\n      \"Hispanic or Latino\": 0.878,\n      \"Pacific Islander\": 0.875,\n      \"White\": 1.0\n    },\n    \"error_rates\": {\n      \"American Indian or Alaska Native\": {\n        \"FNR\": 0.505,\n        \"FPR\": 0.231\n      },\n      \"Asian\": {\n        \"FNR\": 0.349,\n        \"FPR\": 0.388\n      },\n      \"Black or African American\": {\n        \"FNR\": 0.43,\n        \"FPR\": 0.357\n      },\n      \"Hispanic or Latino\": {\n        \"FNR\": 0.43,\n        \"FPR\": 0.28\n      },\n      \"Pacific Islander\": {\n        \"FNR\": 0.427,\n        \"FPR\": 0.0\n      },\n      \"White\": {\n        \"FNR\": 0.366,\n        \"FPR\": 0.368\n      }\n    }\n  },\n  \"XGBoost\": {\n    \"approval_rates\": {\n      \"American Indian or Alaska Native\": 0.855,\n      \"Asian\": 0.926,\n      \"Black or African American\": 0.866,\n      \"Hispanic or Latino\": 0.878,\n      \"Pacific Islander\": 0.912,\n      \"White\": 0.919\n    },\n    \"disparate_impact\": {\n      \"American Indian or Alaska Native\": 0.93,\n      \"Asian\": 1.008,\n      \"Black or African American\": 0.942,\n      \"Hispanic or Latino\": 0.955,\n      \"Pacific Islander\": 0.992,\n      \"White\": 1.0\n    },\n    \"error_rates\": {\n      \"American Indian or Alaska Native\": {\n        \"FNR\": 0.09,\n        \"FPR\": 0.385\n      },\n      \"Asian\": {\n        \"FNR\": 0.039,\n        \"FPR\": 0.552\n      },\n      \"Black or African American\": {\n        \"FNR\": 0.083,\n        \"FPR\": 0.549\n      },\n      \"Hispanic or Latino\": {\n        \"FNR\": 0.074,\n        \"FPR\": 0.453\n      },\n      \"Pacific Islander\": {\n        \"FNR\": 0.062,\n        \"FPR\": 0.5\n      },\n      \"White\": {\n        \"FNR\": 0.054,\n        \"FPR\": 0.549\n      }\n    }\n  }\n}\n\nPlease provide a structured analysis using the Belmont Report principles:\n- Respect for Persons\n- Beneficence\n- Justice\n\nAlso include System 1 (fast detector) and System 2 (slow adjudicator) reasoning,\nlinking patterns in the data to potential systemic causes and governance implications."
+  },
+  "fairness_metrics": {
+    "Logistic Regression": {
+      "approval_rates": {
+        "American Indian or Alaska Native": 0.468,
+        "Asian": 0.628,
+        "Black or African American": 0.54,
+        "Hispanic or Latino": 0.541,
+        "Pacific Islander": 0.539,
+        "White": 0.616
+      },
+      "disparate_impact": {
+        "American Indian or Alaska Native": 0.76,
+        "Asian": 1.019,
+        "Black or African American": 0.877,
+        "Hispanic or Latino": 0.878,
+        "Pacific Islander": 0.875,
+        "White": 1.0
+      },
+      "error_rates": {
+        "American Indian or Alaska Native": {
+          "FNR": 0.505,
+          "FPR": 0.231
+        },
+        "Asian": {
+          "FNR": 0.349,
+          "FPR": 0.388
+        },
+        "Black or African American": {
+          "FNR": 0.43,
+          "FPR": 0.357
+        },
+        "Hispanic or Latino": {
+          "FNR": 0.43,
+          "FPR": 0.28
+        },
+        "Pacific Islander": {
+          "FNR": 0.427,
+          "FPR": 0.0
+        },
+        "White": {
+          "FNR": 0.366,
+          "FPR": 0.368
+        }
+      }
+    },
+    "XGBoost": {
+      "approval_rates": {
+        "American Indian or Alaska Native": 0.855,
+        "Asian": 0.926,
+        "Black or African American": 0.866,
+        "Hispanic or Latino": 0.878,
+        "Pacific Islander": 0.912,
+        "White": 0.919
+      },
+      "disparate_impact": {
+        "American Indian or Alaska Native": 0.93,
+        "Asian": 1.008,
+        "Black or African American": 0.942,
+        "Hispanic or Latino": 0.955,
+        "Pacific Islander": 0.992,
+        "White": 1.0
+      },
+      "error_rates": {
+        "American Indian or Alaska Native": {
+          "FNR": 0.09,
+          "FPR": 0.385
+        },
+        "Asian": {
+          "FNR": 0.039,
+          "FPR": 0.552
+        },
+        "Black or African American": {
+          "FNR": 0.083,
+          "FPR": 0.549
+        },
+        "Hispanic or Latino": {
+          "FNR": 0.074,
+          "FPR": 0.453
+        },
+        "Pacific Islander": {
+          "FNR": 0.062,
+          "FPR": 0.5
+        },
+        "White": {
+          "FNR": 0.054,
+          "FPR": 0.549
+        }
+      }
+    }
+  },
+  "api_response": "### Structured Analysis Using the Belmont Report Principles\n\n#### 1. Respect for Persons\n- **Autonomy and Dignity**: The data reveals significant disparities in approval rates across racial and ethnic groups. For example, the approval rate for American Indian or Alaska Native borrowers is notably lower (46.8% in Logistic Regression) compared to White borrowers (61.6%). This disparity raises ethical concerns regarding the autonomy and dignity of marginalized groups, who may feel disempowered and discriminated against in the mortgage approval process.\n- **Informed Consent**: Borrowers must be adequately informed about how their data is used in decision-making processes. The presence of demographic fields and race indicators in the model raises questions about whether individuals are fully aware of how their identities might influence their loan approval outcomes.\n\n#### 2. Beneficence\n- **Maximizing Benefits**: The XGBoost model shows improved approval rates across all racial groups compared to the Logistic Regression model, suggesting a potential for enhanced fairness in outcomes. However, the overall approval rates remain lower for minority groups, indicating that while the model may provide some benefits, it does not fully address systemic issues.\n- **Minimizing Harm**: The high false negative rates (FNR) for marginalized groups in both models, particularly in the Logistic Regression (e.g., 50.5% for American Indian or Alaska Native), suggest a significant risk of harm. Denying loans to qualified borrowers can exacerbate existing inequalities and limit access to housing, which is a fundamental need.\n\n#### 3. Justice\n- **Fair Distribution of Risks and Rewards**: The disparate impact ratios indicate that minority groups face higher barriers to loan approval. For instance, the disparate impact ratio for Black or African American borrowers is 0.877, suggesting they are less likely to be approved relative to White borrowers. This inequity in access to financial resources contradicts the principle of justice, which calls for equitable treatment.\n- **Systemic Inequities**: The findings align with research indicating that structural patterns in the mortgage market disproportionately affect minority borrowers. This systemic bias, perpetuated by less-regulated lending channels, must be addressed to ensure fair access to mortgage financing.\n\n### System 1 and System 2 Reasoning\n\n#### System 1 (Fast Detector)\n- **Immediate Patterns**: The stark differences in approval rates and error rates across racial and ethnic groups can be quickly identified, suggesting an urgent need for intervention. For instance, the high false negative rates for American Indian or Alaska Native and Black or African American borrowers signal a potential bias that may be perceived as a reflection of underlying prejudices in the decision-making process.\n\n#### System 2 (Slow Adjudicator)\n- **Deeper Analysis**: A more thorough examination reveals that these disparities may stem from systemic issues within the mortgage industry, such as historical discrimination and the segmentation of the market. The reliance on demographic features in the model could inadvertently reinforce biases if not carefully managed. Governance implications include the necessity for regulatory oversight to ensure that models are not only effective in predicting creditworthiness but also equitable in their treatment of all borrowers.\n\n### Governance Implications\n- **Regulatory Oversight**: There is a pressing need for robust regulatory frameworks that monitor and audit automated decision systems for fairness. This includes establishing guidelines for the use of demographic data in models and ensuring transparency in how decisions are made.\n- **Stakeholder Engagement**: Engaging with affected communities to understand their experiences and perspectives can inform model development and implementation, ensuring that systems respect autonomy and dignity.\n- **Continuous Monitoring**: Implementing ongoing assessments of model performance with respect to fairness metrics can help identify and mitigate biases before they lead to systemic harm.\n\n### Conclusion\nIn summary, while the models show some improvement in approval rates for minority groups, significant disparities persist. Upholding the principles of the Belmont Report requires a commitment to addressing these inequities through informed governance, stakeholder engagement, and continuous monitoring of automated decision systems. Ensuring fairness, minimizing harm, and promoting justice are essential to fostering an equitable mortgage approval process.",
+  "api_metadata": {
+    "response_id": "gen-1761775457-ScnXIdxDaxwiBrRVxEsa",
+    "usage": {
+      "prompt_tokens": 1125,
+      "completion_tokens": 820,
+      "total_tokens": 1945,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "status_code": 200
+  }
+}

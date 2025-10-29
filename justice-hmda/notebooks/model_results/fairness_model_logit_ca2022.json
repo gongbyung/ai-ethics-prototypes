@@ -1,0 +1,17 @@
+{
+  "model_name": "logit_fairness_audit_ca2022",
+  "objective": "Estimate conditional odds of mortgage approval by race controlling for key creditworthiness factors.",
+  "methodology": "Binary logistic regression fitted on 2022 California HMDA data, with approval (1=approved/originated, 0=denied) as the dependent variable. Independent variables include loan_amount, loan_term, loan_to_value_ratio, income_ratio, and dti_clean, plus race-group indicators (White as the reference group). Numeric variables were median-imputed and standardized. Statsmodels was used for transparent inference with full coefficient and odds ratio outputs.",
+  "data_source": "../data/processed/hmda_ca2022_train.csv",
+  "pseudo_r2": 0.1278,
+  "log_likelihood": -23945.1,
+  "timestamp": "2025-10-29T13:09:46.227360",
+  "race_odds_ratios": {
+    "Pacific Islander": 0.9844,
+    "American Indian or Alaska Native": 0.9741,
+    "Hispanic or Latino": 0.9606,
+    "Asian": 0.9014,
+    "Black or African American": 0.8923
+  },
+  "notes": "Odds ratios below 1.0 indicate lower approval likelihoods relative to White applicants, after controlling for financial risk indicators. Findings show that, despite equivalent credit profiles, Black and Asian applicants had approximately 10\u201311% lower odds of approval, while Hispanic and American Indian applicants had odds within 3\u20134% of parity. Pacific Islander outcomes were statistically indistinguishable from White applicants. Pseudo R\u00b2 of ~0.13 suggests moderate explanatory power, typical for decision-level fairness models."
+}
