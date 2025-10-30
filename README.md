@@ -41,14 +41,11 @@ Each prototype began as an essay exploring the intersection of ethics, risk, and
 
 ---
 
-## **System 2 MVP: Turning Signals into Reasoning**
-
-**System 1 fast-thinking AI** flags ethical signals — fairness gaps, manipulative design, potential harm.  However, signals alone don’t create accountability.  
-The **System 2 slow-thinking AI** adds deliberation by routing these outputs into a reasoning layer powered by LLMs and human oversight.
+## **Ethical Reinforcement Learning Architecture**
 
 ### **Reward Function with Ethical Weighting**
 
-At the core of this architecture is a *hybrid reward function* that balances system performance with ethical alignment:
+At the core of this framework is a *hybrid reward function* balancing performance with ethical alignment:
 
 `R_responsible = (1 - λ) * R_objective + λ * R_Belmont`
 
@@ -57,102 +54,105 @@ where:
 - **R_Belmont** = ethical alignment score reflecting *Respect*, *Beneficence*, and *Justice*  
 - **λ (lambda)** = human-adjusted weight reflecting how strongly ethical duty constrains performance  
 
-*Think of λ as your ethical brake pedal — the higher it is, the more the system slows down to honor principle over profit.*
+The higher λ is, the more the model prioritizes ethics over raw performance.
 
 ---
 
-### **Concept**
+### **Concept: AI Ethics Agents & AI Ethics Officer Agent**
 
-- **System 1 → Ethical Feedback**  
-  Detects real-time deviations and adjusts *R_Belmont* based on fairness, harm, or transparency metrics.  
+- **AI Ethics Agents (System 1, Thinking Fast)**  
+  Fast detectors that scan live data for fairness, harm, or transparency violations and adjust *R_Belmont* accordingly.  
 
-- **System 2 → Human-in-the-Loop**  
-  Translates these signals into human-readable rationales, nudging humans to evaluate trade-offs and adjust model sensitivity.  
+- **AI Ethics Officer Agent (System 2, Thinking Slow)**  
+  A slower, reasoning LLM layer that evaluates ethical alerts, provides explanations, and recommends whether humans should adjust λ — a digital ethics officer in the loop.  
 
-- **Continuous Governance Loop**  
-  When ethical tensions arise (e.g., fairness vs. inclusion), humans decide whether to rebalance *λ*, redefining how the system weighs outcomes against duties.  
-  Together, System 1, System 2, and human oversight form a *closed ethical feedback loop* — the foundation of responsible reinforcement learning.
+- **Human Oversight (λ Tuning)**  
+  Humans review recommendations, weigh trade-offs, and decide whether to rebalance λ.  
+  Together, these three roles form a continuous *ethical feedback loop* that combines machine learning with moral learning.
 
 ---
 
 ### **Example Flow**
 
-1. **System 1 Alert:**  
+1. **AI Ethics Agent Alert:**  
    “Rate-spread gap = 0.45 pp for Black borrowers after controls.”  
-   → Ethical deviation detected and fed into *R_Belmont* as a fairness penalty.  
-   Initial reward weighting: λ = 0.3 (ethical constraints moderately weighted).  
+   → Fairness penalty applied to *R_Belmont*. Initial weighting λ = 0.3.  
 
-2. **System 2 Prompt:**  
-   > “Act as an AI Ethics Officer applying the Belmont principles. Evaluate this alert.  
-   > Identify which duties are affected, whether the risk is acceptable or systemic, and recommend mitigations.”  
+2. **AI Ethics Officer Agent Review:**  
+   > “Justice principle violated — persistent disparity likely. Beneficence partially offsets inclusion benefits. Recommend fairness audit and rate-cap review.”  
 
-3. **System 2 Response:**  
-   > “Justice principle violated — persistent disparity likely.  
-   > Beneficence is partially offset by inclusion benefits.  
-   > Recommend fairness audit and rate-cap review.”  
+3. **Human Oversight:**  
+   Human reviewer confirms material fairness risk.  
+   Ethical weighting increased from **λ = 0.3 → 0.4**, raising the influence of *R_Belmont* in the model’s objective.  
 
-4. **Human Oversight:**  
-   The AI Ethics Officer reviews System 2’s output and confirms a material fairness issue.  
-   To strengthen ethical weighting, λ is increased from **0.3 → 0.4** to give greater priority to Justice in the reward function.  
-   Updated reward function:  
-   `R_responsible = (1 − λ) * R_objective + λ * R_Belmont`  
-   → Now, ethical alignment accounts for 40% of the model’s optimization objective.  
+4. **Feedback Logged:**  
+   Adjustment recorded for audit and propagated across monitoring and assurance layers.  
 
-5. **Feedback Recorded:**  
-   The adjustment is logged for audit and propagates through monitoring and assurance layers, ensuring accountability and traceability across System 1 → System 2 → Human governance.
-
-*This loop demonstrates how ethical alignment becomes measurable: fast detection (System 1), slow reasoning (System 2), and human judgment jointly rebalance λ to sustain trust and transparency.*
-
-Once deployed, this architecture evolves into a **governed control system** — where the same ethical feedback loops are managed through organizational oversight, not just code.
+This loop operationalizes *Belmont-based reinforcement learning* — fast detection, slow reasoning, and human judgment, all reinforcing one another.
 
 ---
 
 ## **Governance Structure: Ethical Reinforcement Learning with Human Oversight**
 
-This structure blends **Reinforcement Learning (RL)** with **Libertarian Paternalism (LP)** — combining *ethical nudges*, *human judgment*, and *organizational governance* to align AI with societal and corporate values.
-
-### **Three Lines of Defense Framework**
-
-| Line | Function | Human Role | Key Activities | 
-|------|-----------|-------------|----------------|
-| **First Line – Operations & Detection** | Monitor real-time behavior, detect bias, harm, or drift | **Model Owner / Analyst** – reviews alerts and performance deviations | Continuous monitoring, trigger ethical risk flags, document incidents | 
-| **Second Line – Oversight & Deliberation** | Evaluate ethical trade-offs and determine corrective actions | **AI Ethics Officer / Compliance Reviewer** – interprets System 2 insights, decides on mitigation or retraining | Root-cause analysis, ethical impact assessments, policy updates | 
-| **Third Line – Independent Assurance** | Validate integrity of the oversight process and outcomes | **Internal Audit / Board Risk Committee** – ensures accountability and conformance to policy and law | Ethical KPI audits, external certification, regulator engagement | 
+This framework integrates **Reinforcement Learning (RL)** with **Libertarian Paternalism (LP)**, combining *ethical nudges*, *human judgment*, and *organizational governance* to align AI behavior with both societal and corporate values.
 
 ---
 
-### **Operational Flow**
+### **The Three Lines of AI Defense**
 
-1. **System 1 (Detection)** identifies potential ethical deviations and updates the hybrid reward.  
-2. **System 2 (Deliberation)** contextualizes those signals, framing trade-offs between performance and duty.  
-3. **Human Oversight (Three Lines)** interprets findings, updates policies, and documents justification for changes to model objectives or thresholds.  
-4. **Feedback Loops** ensure ethical alignment (*R_Belmont*) evolves with new evidence — not static constraints.
+**1️⃣ First Line – Operations & Detection**  
+Model owners and analysts serve as the first line of defense. They monitor real-time model behavior to detect bias, harm, or drift, and adjust **λ** (the ethical weighting) within safe boundaries when conditions change.  
+Their job is to ensure *fast detection and stable operation* — keeping systems accountable on a day-to-day basis.
 
-This structure embeds **continuous learning and accountability** directly into the AI lifecycle.
+**2️⃣ Second Line – Oversight & Deliberation**  
+Compliance teams and the **AI Ethics Officer Agent** form the second line of defense. They interpret alerts from the model, assess ethical trade-offs, and challenge the first line when decisions drift beyond tolerance.  
+This team determines when to raise **λ** (increasing ethical weight) or lower it (increasing flexibility) and leads root-cause analyses, ethical impact assessments, and retraining decisions.
+
+**3️⃣ Third Line – Independent Assurance**  
+Internal Audit and the Board’s Risk Committee make up the third line. Their responsibility is to verify that the entire governance loop is working as designed.  
+They review **λ** adjustments, validate the reasoning behind ethical trade-offs, and ensure alignment with policies, laws, and societal expectations.  
+This line also manages external audits and regulator engagement to ensure transparency and accountability.
+
+---
+
+### **How It Works Across the Lifecycle**
+
+**During Training**  
+λ begins as a fixed default — a *choice architecture nudge*.  
+The first line monitors model performance and ethical outcomes, fine-tuning λ within defined limits to find the right balance between performance and principle before deployment.
+
+**During Production**  
+- The **First Line** continues to adjust λ within approved thresholds, maintaining alignment between model performance and ethical expectations.  
+- The **Second Line** provides a credible challenge when the model drifts outside ethical risk tolerance — reviewing context, verifying justifications, and approving or escalating λ changes.  
+- The **Third Line** independently assures that the First and Second Line controls are properly designed, implemented, and documented — ensuring the entire feedback loop remains transparent, reliable, and auditable.
+
+---
+
+Together, these three lines form a **living governance system** — one where ethical learning, human oversight, and regulatory assurance evolve hand in hand with the AI itself.
 
 ---
 
 ### **Mapping to Global and State AI Legal Frameworks**
 
-The **AI Ethics Officer (AIEO)** governance model aligns with both **international** and **California state-level AI frameworks**, bridging ethical accountability, regulatory compliance, and risk management.  
-By integrating continuous detection (System 1), deliberation (System 2), and independent assurance (System 3), the AIEO approach operationalizes principles required by laws like the **EU AI Act**, **ISO 42001**, **NIST AI RMF**, and California’s **SB 53** and **SB 243**.
+The **AI Ethics Officer (AIEO)** governance model aligns with both **international** and **California state-level AI frameworks**, bridging *ethical accountability, regulatory compliance,* and *risk management.*  
 
-
+By integrating continuous detection (**Ethics Agents** – First Line), structured deliberation (**Ethics Officer Agent** – Second Line), and independent assurance (**Audit & Board** – Third Line),  
+the AIEO model operationalizes the principles embedded in the **EU AI Act**, **ISO/IEC 42001 family**, **NIST AI RMF**, and California’s **SB 53** and **SB 243**.
 
 <details>
 <summary>Mapping to Global and State AI Legal Frameworks</summary>
 
-| Framework | Title / Scope | AI Ethics Officer (AIEO) Integration |
-|------------|---------------|--------------------------------------|
-| **EU AI Act (2024)** | Establishes a risk-based framework for AI governance across the EU, categorizing systems as minimal, limited, high, or unacceptable risk. Requires conformity assessments, transparency obligations, and human oversight for high-risk systems. | AIEO governs high-risk AI through structured impact assessments, model monitoring, and transparency registers. Aligns with System 2 deliberation and System 3 assurance. |
-| **ISO/IEC 23894 (2023)** | *Artificial Intelligence — Guidance on Risk Management*; provides methods for identifying, assessing, treating, and monitoring AI-specific risks across the lifecycle. | System 1 manages real-time risk detection; System 2 governs treatment and escalation. AIEO maintains a living AI Risk Register integrated with enterprise ERM frameworks. |
-| **ISO/IEC 42001 (2023)** | *Artificial Intelligence Management System Standard (AIMS)*; defines organizational governance, policies, and continual improvement cycles for responsible AI. | AIEO serves as AI Risk Owner & Auditor in the AIMS cycle, ensuring leadership accountability and cross-functional oversight. |
-| **ISO/IEC 42005 (2025)** | *AI System Impact Assessment*; published May 2025. Establishes a standardized framework for identifying and documenting human, societal, and environmental impacts prior to deployment. | AIEO integrates impact assessment templates into project intake and model reviews, tying ethical outcomes (Respect, Beneficence, Justice) to risk ratings. |
-| **ISO/IEC 42006 (2025)** | *Requirements for Bodies Providing Audit and Certification of AI Management Systems*; published July 2025. Defines competence, impartiality, and consistency standards for AI auditors and certification entities. | Maps to **System 3 – Independent Assurance**. AIEO coordinates external audits for periodic ethics and fairness certification. |
-| **ISO/IEC 38507** | *Governance Implications of the Use of AI by Organizations*; clarifies board and executive responsibility for AI use and alignment with ethical norms and mission objectives. | Embeds board accountability and ethical oversight within ERM. AIEO reports directly to Risk and Audit Committees to ensure tone from the top. |
-| **NIST AI RMF 1.0 (2023)** | *AI Risk Management Framework*; U.S. standard outlining a cyclical process (Identify → Measure → Manage → Govern) to promote trustworthy AI. | AIEO implements continuous monitoring (System 1) and governance review (System 2–3). Provides alignment with U.S. AI trustworthiness standards. |
-| **California SB 53 (2025)** | *Transparency in Frontier Artificial Intelligence Act*; applies to frontier model developers. Requires disclosure of safety frameworks, catastrophic risk assessments, and incident reporting; includes whistleblower protections. | AIEO ensures disclosure compliance, maintains public safety documentation, and manages whistleblower channels. Maps to **System 2 Oversight + System 3 External Assurance**. |
-| **California SB 243 (2025)** | *Companion Chatbot Safety & Accountability Act*; regulates human-facing conversational AI. Requires bots to self-identify, protect minors, maintain safety protocols, and submit audit reports. | AIEO integrates safeguards into **System 1 Detectors** for manipulative or unsafe behavior and **System 2 Reasoning** for user-risk evaluation, reinforcing Respect and Beneficence. |
+| Framework | Title / Scope | Mapping to AI Governance Structure |
+|------------|---------------|------------------------------------|
+| **EU AI Act (2024)** | Establishes a risk-based framework for AI governance, classifying systems by risk (minimal → high → unacceptable). Requires *conformity assessments, transparency, and human oversight* for high-risk AI. | **1st Line – Ethics Agents:** continuous monitoring & detection of bias and harm.<br>**2nd Line – Ethics Officer Agent:** ensures human oversight and conformity assessment.<br>**3rd Line – Audit & Board:** provides independent assurance and maintains transparency registers. |
+| **ISO/IEC 23894 (2023)** | *AI — Guidance on Risk Management*; details how to identify, assess, treat, and monitor AI-specific risks. | **1st Line:** manages real-time risk detection and mitigation.<br>**2nd Line:** treats and escalates ethical and operational risks.<br>**3rd Line:** validates AI risk management integration into enterprise frameworks. |
+| **ISO/IEC 42001 (2023)** | *AI Management System Standard (AIMS)*; defines governance structures, roles, and continual improvement cycles for responsible AI. | **2nd Line:** AIEO functions as AI Risk Owner & Ethics Officer within AIMS governance.<br>**3rd Line:** Audit verifies adherence to policies and continuous improvement cycles. |
+| **ISO/IEC 42005 (2025)** | *AI System Impact Assessment*; provides a methodology for identifying human, societal, and environmental impacts prior to deployment. | **2nd Line:** integrates impact templates and ethical KPIs (Respect, Beneficence, Justice) into project intake and reviews.<br>**3rd Line:** validates completeness of impact assessments during assurance reviews. |
+| **ISO/IEC 42006 (2025)** | *Requirements for Bodies Providing Audit and Certification of AI Management Systems*; defines standards for competence and impartiality in AI audits. | **3rd Line:** directly maps to independent assurance — external audit and certification of ethics, fairness, and risk controls. |
+| **ISO/IEC 38507 (2022)** | *Governance Implications of the Use of AI by Organizations*; clarifies board and executive responsibility for AI ethics and risk. | **3rd Line:** aligns with board-level accountability — ensuring tone from the top and ethical oversight across all lines. |
+| **NIST AI RMF 1.0 (2023)** | *AI Risk Management Framework*; defines a cyclical model (Identify → Measure → Manage → Govern) for trustworthy AI. | **1st Line:** corresponds to Identify & Measure stages — real-time monitoring.<br>**2nd Line:** governs Manage stage — ethical and compliance response.<br>**3rd Line:** anchors the Govern stage — assurance and transparency. |
+| **California SB 53 (2025)** | *Transparency in Frontier AI Act*; mandates disclosure of safety frameworks, catastrophic risk assessments, and whistleblower protections. | **2nd Line:** AIEO ensures safety disclosures and maintains risk documentation.<br>**3rd Line:** validates disclosure integrity and manages whistleblower oversight. |
+| **California SB 243 (2025)** | *Chatbot Safety & Accountability Act*; regulates conversational AI, requiring self-identification, minor protection, and audit reports. | **1st Line:** embeds behavioral safeguards into AI Ethics Agents for manipulative or unsafe conduct.<br>**2nd Line:** ensures human-in-the-loop review for flagged interactions.<br>**3rd Line:** validates audit logs and safety reports submitted to regulators. |
 
 </details>
 
@@ -164,8 +164,9 @@ AI oversight will fail if it only reacts fast without thinking, or thinks deeply
 These prototypes test whether **ethical duties can be operationalized** in real-world data systems across fairness, respect, welfare, and choice.  
 
 They’re not perfect — they’re minimum viable prototypes.  
+The goal is simple: 
 
-The goal is simple: **start small, think big, and stay human.**
+### start small, think big, and stay human.
 
 ---
 
