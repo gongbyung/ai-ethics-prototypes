@@ -115,9 +115,7 @@ Mortgage-related complaints, January–December 2024, filtered for narratives (`
 ## Limitations
 
 - CFPB redactions prevent entity-level linkage (no names, account details).  
-- “Timely” responses track procedural compliance, not satisfaction.  
 - Complaint counts may reflect company size or consumer awareness, not misconduct prevalence.  
-- Focused only on **2024 Mortgage** segment for MVP clarity — multi-product analysis planned for next phase. 
 
 ---
 
