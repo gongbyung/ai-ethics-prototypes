@@ -7,7 +7,7 @@
 ### Goal  
 Detect and interpret potential **consumer harm patterns** in financial services using the **Consumer Financial Protection Bureau (CFPB)** complaint database.  
 
-This project builds a **proof-of-concept NLP pipeline** — combining public complaint narratives, natural language embeddings, and ethical reasoning to identify emerging risks and systemic issues.  
+This project develops a **proof-of-concept NLP pipeline** that combines public complaint narratives, natural language embeddings, and ethical reasoning to identify emerging risks and systemic issues.  
 
 It’s not about replacing the regulator.  
 It’s about **scaling its awareness** — listening to consumers when institutions stop listening.
@@ -29,7 +29,7 @@ It surfaces **where to look before the next scandal breaks**.
 ## Project Structure  
 
 ```text
-cfpb-nlp-risk-watchdog/
+respect-cfpb/
 ├── data/                      
 │   ├── raw/                   # original CFPB complaint export (Mortgage 2024)
 │   ├── interim/               # cleaned/intermediate data
@@ -39,16 +39,6 @@ cfpb-nlp-risk-watchdog/
 │   ├── 01_eda_cfpb_mortgage.ipynb   # exploratory data analysis + cleaning
 │   └── 02_modeling_nlp.ipynb        # embeddings, topic modeling, clustering
 │
-├── scripts/
-│   ├── fetch_cfpb_data.py
-│   ├── clean_cfpb_data.py
-│   └── __init__.py
-│
-├── outputs/
-│   ├── figures/                # selected visualizations
-│   ├── topics/                 # model outputs + cluster summaries
-│   └── logs/
-│
 ├── requirements.txt
 └── README.md
 ```
@@ -57,31 +47,42 @@ cfpb-nlp-risk-watchdog/
 ## Methodology
 
 ### 1. Exploratory Data Analysis (EDA)
-- Clean and standardize CFPB mortgage complaints (2024, ~12K)
-- Remove/redact tokens (e.g., “XXXX”), normalize text/casing, standardize company/issue names
-- Compute narrative length stats; inspect outliers
-- Plot volume by month, issue, and company
+- Clean and standardize CFPB **mortgage complaints (2024, ~12K)**  
+- Remove redacted tokens (e.g., “XXXX”), normalize casing and whitespace  
+- Standardize categorical fields (company, issue, sub-product)  
+- Compute narrative length statistics and inspect outliers  
+- Visualize complaint volume by **month**, **issue**, and **company**
 
-### 2. Theme Extraction
-- **BERTopic** with **FinBERT embeddings**
-- Produce interpretable clusters (e.g., *Escrow errors*, *Payment delays*, *Foreclosure issues*)
-- Track topic frequency and growth as early-warning signals
+---
 
-### 3. Risk Labeling
-- Binary target from company response:
-  - **1 = Risk** → “Closed with monetary relief” or “Closed with non-monetary relief”
-  - **0 = No Risk** → all other outcomes
+### 2. Baseline Model — TF-IDF + Logistic Regression
+The first benchmark for complaint-risk detection uses a traditional bag-of-words approach.  
+Each complaint narrative is vectorized using **TF-IDF (Term Frequency–Inverse Document Frequency)** and fed into a **Logistic Regression** classifier to predict whether the complaint is likely to involve consumer harm.
 
-### 4. Risk Classification
-- Fine-tune **FinBERT** with **LoRA (PEFT)** for efficient adaptation
-- Task: predict `risk_flag` from cleaned narrative
-- Split: 80/20 stratified train–test
-- Metrics: **Precision**, **Recall**, **F1**, **ROC-AUC**
+- Input: `clean_text` (narrative), `risk_flag` (binary target)  
+- Evaluation: Precision, Recall, F1-Score, ROC-AUC  
+- Purpose: Establish an interpretable baseline before transformer fine-tuning
 
-### 5. Monitoring & Early Warning
-- Score new complaints → `risk_score` (0–1) and map to `topic`
-- Aggregate by company/issue/geography; surface hotspots
-- Dashboard for trend tracking and analyst triage
+---
+
+### 3. Theme Extraction
+- Use **BERTopic** with **FinBERT embeddings** to extract latent complaint themes  
+- Generate interpretable clusters (e.g., *Escrow Errors*, *Payment Delays*, *Foreclosure Issues*)  
+- Track **topic frequency and growth** as early-warning signals for emerging consumer risk  
+- Compare across companies and time periods to identify systemic issues
+
+---
+
+### 4. Risk Labeling
+- Construct a binary target from company responses:  
+  - **1 = Risk** → “Closed with monetary relief” or “Closed with non-monetary relief”  
+  - **0 = No Risk** → all other outcomes  
+- This label serves as the ground truth for supervised training and validation
+
+---
+
+### 5. Risk Classification — FinBERT + LoRA Fine-Tuning
+To capture nuanced language patterns in financial complaints, the model fine-tunes **FinBERT**, a domain-specific variant of BERT trained on financial text.
 
 ---
 
