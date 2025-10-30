@@ -34,7 +34,7 @@ beneficence-hmda/
 │
 ├── notebooks/
 │   ├── 01_eda.ipynb       # exploratory data analysis
-│   ├── 02_model.ipynb     # OLS + ML pricing models
+│   ├── 02_model.ipynb     # OLS + ML audit models
 │
 ├── outputs/               # selected figures, tables
 ├── requirements.txt
@@ -50,14 +50,14 @@ beneficence-hmda/
    • Inspect rate_spread (APR − APOR) distributions by race/ethnicity, income, and loan type
    • Profile borrower/loan features: LTV, DTI, loan amount, term, occupancy, property type
 
-2. Baseline Pricing Model — OLS
+2. Baseline Audit Model — OLS
    • Target: rate_spread (APR − APOR)
    • Controls: loan-to-value, debt-to-income, loan amount, term, occupancy, property type
    • Optional: lender and metro fixed effects
    • Group effects: race/ethnicity dummies (White baseline)
    • Goal: Does race predict higher pricing conditional on financial risk?
 
-3. ML Pricing Models — Nonlinear Patterns
+3. ML Audit Models — Nonlinear Patterns
    • Algorithms: Random Forest Regressor, XGBoost Regressor
    • Compare model fit (R², RMSE) to OLS
    • Examine feature importances to explore nonlinear effects
