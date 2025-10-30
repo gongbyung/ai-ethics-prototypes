@@ -1,6 +1,6 @@
 # Who’s Guarding the Consumers?  
 **Part of:** *AI Ethics Prototypes — Walking the Walk*  
-**Author:** Alex Kim  
+**Author:** Alex Kim & Patrick Abousleiman
 
 ---
 
