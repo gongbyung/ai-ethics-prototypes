@@ -1,15 +1,35 @@
-echo "venv/
+# Ignore virtual environments
+venv/
 */venv/
+
+# Ignore Python caches
 __pycache__/
 .ipynb_checkpoints/
+
+# Ignore system files
 .DS_Store
+
+# Ignore data directories
 data/
 data/raw/
 data/interim/
 data/processed/
+
+# Ignore model outputs and checkpoints
 outputs/
-.env
 *.pt
 *.bin
 *.h5
-" > .gitignore
+
+# Ignore environment and secret files
+.env
+API_KEY.txt
+*.key
+*.json
+*.pem
+*.pkl
+
+# Optional: ignore logs and temporary results
+logs/
+llm_logs/
+model_results/
