@@ -2,14 +2,15 @@
 venv/
 */venv/
 
-# Ignore Python caches
+# Ignore Python caches and notebook artifacts
 __pycache__/
 .ipynb_checkpoints/
+*.pyc
 
 # Ignore system files
 .DS_Store
 
-# Ignore data directories
+# Ignore data directories (raw, processed, interim)
 data/
 data/raw/
 data/interim/
@@ -17,9 +18,22 @@ data/processed/
 
 # Ignore model outputs and checkpoints
 outputs/
+respect-cfpb/models/
 *.pt
 *.bin
 *.h5
+*.safetensors
+*.ckpt
+*.onnx
+
+# Ignore Hugging Face cache and trainer outputs
+runs/
+results/
+checkpoints/
+cache/
+hf_cache/
+*.log
+*.tmp
 
 # Ignore environment and secret files
 .env
@@ -29,7 +43,7 @@ API_KEY.txt
 *.pem
 *.pkl
 
-# Optional: ignore logs and temporary results
+# ignore logs and temporary results
 logs/
 llm_logs/
 model_results/
