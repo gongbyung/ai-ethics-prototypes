@@ -1,28 +1,24 @@
 # Who’s Guarding the Consumers?  
-**Part of:** *AI Ethics Prototypes — Walking the Walk*  
+
 **Author:** Alex Kim & Patrick Abousleiman
 
 ---
 
 ### Goal  
-Detect and interpret potential **consumer harm patterns** in financial services using the **Consumer Financial Protection Bureau (CFPB)** complaint database.  
+Build an NLP pipeline that detects potential consumer harm in financial services using the CFPB Complaint Database.
+We classify complaint narratives into risky vs. non-risky outcomes using company relief responses (monetary or non-monetary) as a proxy label.
 
-This project develops a **proof-of-concept NLP pipeline** that combines public complaint narratives, natural language embeddings, and ethical reasoning to identify emerging risks and systemic issues.  
-
-It’s not about replacing the regulator.  
-It’s about **scaling its awareness** — listening to consumers when institutions stop listening.
+This project is a proof-of-concept exploring whether modern NLP methods can serve as a risk radar in an environment where regulatory supervision has weakened.
 
 ---
 
 ## Why This Matters  
 
-The CFPB’s complaint data is one of the richest public signals of financial stress — millions of firsthand accounts of people losing access, losing money, or losing trust.  
+CFPB complaints are one of the most detailed public signals of consumer harm.
+But with the CFPB’s supervisory slowdown, millions of narratives risk becoming unread early warnings.
 
-But as the Bureau’s active supervision has slowed, those signals risk being lost in the noise.  
-
-This project acts as a **risk radar** for the modern financial system:  
-It doesn’t prove intent.  
-It surfaces **where to look before the next scandal breaks**.  
+This project does not replace regulation.
+Can NLP surface emerging risk patterns before the next consumer-harm event?
 
 ---
 
@@ -30,16 +26,18 @@ It surfaces **where to look before the next scandal breaks**.
 
 ```text
 respect-cfpb/
-├── data/                      
-│   ├── raw/                   # original CFPB complaint export (Mortgage 2024)
-│   ├── interim/               # cleaned/intermediate data
-│   └── processed/             # (upcoming) model-ready datasets
+├── data/
+│   ├── raw/                 # original CFPB complaints
+│   ├── interim/             # cleaned text, normalized fields
+│   └── processed/           # train/val/test splits
 │
 ├── notebooks/
-│   ├── 01_eda_cfpb_mortgage.ipynb   # exploratory data analysis + cleaning
-│   └── 02_modeling_nlp.ipynb        # embeddings, topic modeling, clustering
+│   ├── 01_eda.ipynb                 # cleaning, EDA
+│   ├── 02_modeling_nlp.ipynb        # baseline + FinBERT 
+│   ├── 02_modeling_nlp.ipynb        # BERT + RoBERTa
+│   └── 03_modeling_topic.ipynb      # Post-hoc clustering + error analysis
 │
-├── requirements.txt
+├── outputs/                # saved model checkpoints & metrics
 └── README.md
 ```
 ---
@@ -47,42 +45,29 @@ respect-cfpb/
 ## Methodology
 
 ### 1. Exploratory Data Analysis (EDA)
-- Clean and standardize CFPB **mortgage complaints (2024, ~12K)**  
-- Remove redacted tokens (e.g., “XXXX”), normalize casing and whitespace  
-- Standardize categorical fields (company, issue, sub-product)  
-- Compute narrative length statistics and inspect outliers  
-- Visualize complaint volume by **month**, **issue**, and **company**
+•	Filter CFPB mortgage complaints with narratives
+•	Normalize casing, remove redacted tokens (XXXX), strip whitespace
+•	Preserve domain-specific mortgage terms
+•	Examine class imbalance (~5% risky)
+•	Inspect narrative length distribution (many > 512 tokens)
+•	Stratified 60/20/20 split into train/validation/test
 
 ---
 
 ### 2. Baseline Model — TF-IDF + Logistic Regression
-The first benchmark for complaint-risk detection uses a traditional bag-of-words approach.  
-Each complaint narrative is vectorized using **TF-IDF (Term Frequency–Inverse Document Frequency)** and fed into a **Logistic Regression** classifier to predict whether the complaint is likely to involve consumer harm.
-
-- Input: `clean_text` (narrative), `risk_flag` (binary target)  
-- Evaluation: Precision, Recall, F1-Score, ROC-AUC  
-- Purpose: Establish an interpretable baseline before transformer fine-tuning
+A transparent lexical baseline to evaluate whether transformers are worth the added complexity.
+	•	Vectorizer: unigram TF-IDF
+	•	Classifier: Logistic Regression with class_weight='balanced'
+	•	Metrics: Precision, Recall, F1, ROC-AUC
 
 ---
 
-### 3. Theme Extraction
-- Use **BERTopic** with **FinBERT embeddings** to extract latent complaint themes  
-- Generate interpretable clusters (e.g., *Escrow Errors*, *Payment Delays*, *Foreclosure Issues*)  
-- Track **topic frequency and growth** as early-warning signals for emerging consumer risk  
-- Compare across companies and time periods to identify systemic issues
+### 3. Transformer Models
+3.1 Full FinBERT Fine-Tuning
 
----
+3.2 RoBERTa Fine-Tuning 
 
-### 4. Risk Labeling
-- Construct a binary target from company responses:  
-  - **1 = Risk** → “Closed with monetary relief” or “Closed with non-monetary relief”  
-  - **0 = No Risk** → all other outcomes  
-- This label serves as the ground truth for supervised training and validation
-
----
-
-### 5. Risk Classification — FinBERT + LoRA Fine-Tuning
-To capture nuanced language patterns in financial complaints, the model fine-tunes **FinBERT**, a domain-specific variant of BERT trained on financial text.
+3.3 Post-Hoc Topic Modeling (Error Analysis)
 
 ---
 
@@ -113,16 +98,17 @@ Mortgage-related complaints, January–December 2024, filtered for narratives (`
 ---
 
 ## Limitations
-
-- CFPB redactions prevent entity-level linkage (no names, account details).  
-- Complaint counts may reflect company size or consumer awareness, not misconduct prevalence.  
+•	Outcome labels (relief vs no relief) are only imperfect proxies for consumer harm
+•	Redacted data limits entity-level linkage
+•	Complaint volume reflects consumer awareness, not misconduct frequency
 
 ---
 
 ## References
 
-- Consumer Financial Protection Bureau (CFPB). *Consumer Complaint Database Documentation.*  
-- Grimmer & Stewart (2013). *Text as Data: The Promise and Pitfalls of Automatic Content Analysis.*  
-- Blei, Ng, & Jordan (2003). *Latent Dirichlet Allocation.*  
-- Grootendorst (2022). *BERTopic: Neural Topic Modeling with Transformers and c-TF-IDF.*  
+•	Bastani et al. (2019) Topic modeling CFPB complaints using LDA
+•	Oyewola et al. (2023) Deep learning for CFPB complaint classification
+•	Vasudeva Raju et al. (2022) FinBERT for financial text
+•	Roumeliotis et al. (2025) Reasoning LLMs for complaint classification
+•	Hu et al. (2021) LoRA parameter-efficient tuning
 
