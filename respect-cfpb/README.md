@@ -45,20 +45,20 @@ respect-cfpb/
 ## Methodology
 
 ### 1. Exploratory Data Analysis (EDA)
-•	Filter CFPB mortgage complaints with narratives
-•	Normalize casing, remove redacted tokens (XXXX), strip whitespace
-•	Preserve domain-specific mortgage terms
-•	Examine class imbalance (~5% risky)
-•	Inspect narrative length distribution (many > 512 tokens)
-•	Stratified 60/20/20 split into train/validation/test
+- Filter CFPB mortgage complaints with narratives
+- Normalize casing, remove redacted tokens (XXXX), strip whitespace
+- Preserve domain-specific mortgage terms
+- Examine class imbalance (~5% risky)
+- Inspect narrative length distribution (many > 512 tokens)
+- Stratified 60/20/20 split into train/validation/test
 
 ---
 
 ### 2. Baseline Model — TF-IDF + Logistic Regression
 A transparent lexical baseline to evaluate whether transformers are worth the added complexity.
-	•	Vectorizer: unigram TF-IDF
-	•	Classifier: Logistic Regression with class_weight='balanced'
-	•	Metrics: Precision, Recall, F1, ROC-AUC
+- Vectorizer: unigram TF-IDF
+- Classifier: Logistic Regression with class_weight='balanced'
+- Metrics: Precision, Recall, F1, ROC-AUC
 
 ---
 
@@ -98,17 +98,17 @@ Mortgage-related complaints, January–December 2024, filtered for narratives (`
 ---
 
 ## Limitations
-•	Outcome labels (relief vs no relief) are only imperfect proxies for consumer harm
-•	Redacted data limits entity-level linkage
-•	Complaint volume reflects consumer awareness, not misconduct frequency
+- Outcome labels (relief vs no relief) are only imperfect proxies for consumer harm
+- Redacted data limits entity-level linkage
+- Complaint volume reflects consumer awareness, not misconduct frequency
 
 ---
 
 ## References
 
-•	Bastani et al. (2019) Topic modeling CFPB complaints using LDA
-•	Oyewola et al. (2023) Deep learning for CFPB complaint classification
-•	Vasudeva Raju et al. (2022) FinBERT for financial text
-•	Roumeliotis et al. (2025) Reasoning LLMs for complaint classification
-•	Hu et al. (2021) LoRA parameter-efficient tuning
+- Bastani et al. (2019) Topic modeling CFPB complaints using LDA
+- Oyewola et al. (2023) Deep learning for CFPB complaint classification
+- Vasudeva Raju et al. (2022) FinBERT for financial text
+- Roumeliotis et al. (2025) Reasoning LLMs for complaint classification
+- Hu et al. (2021) LoRA parameter-efficient tuning
 
