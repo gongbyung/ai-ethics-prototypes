@@ -24,9 +24,9 @@ The long-term vision is to build toward an **AI Ethics Officer (AIEO)** — an i
 
 | Prototype | Ethical Principle | Question We’re Trying to Answer | Goal | Method | Status |
 |------------|------------------|----------------------------------|------|--------|--------|
-| **Justice: HMDA Disparate Impact Detector** | Justice (Fairness) | *Are lending outcomes equitable across demographic groups?* | Identify potential disparate impacts in mortgage lending | EDA → Logit Models → ML Fairness Tests (RF/XGB) | ✅ MVP Completed |
-| **Respect: CFPB Complaint NLP Pipeline** | Respect for Persons (Voice & Transparency) | *What are people telling us when they say something feels unfair or manipulative?* | Extract themes & ethical “hot spots” from consumer complaints | NLP (topic modeling, clustering, sentiment) | 🚧 MVP in progress |
-| **Beneficence: Who Pays More? Rate Spread Disparate Impact Detector** | Beneficence (Do Good, Avoid Harm) | *Even when lending seems “fair,” who ultimately bears the cost?* | Quantify borrower harm via lifetime cost deltas from rate spreads | EDA → Logit Models → ML Fairness Tests (RF/XGB)  | ✅ MVP Completed |
+| **Justice: HMDA Disparate Impact Detector** | Justice (Fairness) | *Are lending outcomes equitable across demographic groups?* | Identify potential disparate impacts in mortgage lending | EDA → Logit Models → ML Fairness Tests (RF/XGB) | MVP Completed |
+| **Respect: CFPB Complaint NLP Pipeline** | Respect for Persons (Voice & Transparency) | *What are people telling us when they say something feels unfair or manipulative?* | Extract themes & ethical “hot spots” from consumer complaints | NLP (topic modeling, clustering, sentiment) | MVP Completed |
+| **Beneficence: Who Pays More? Rate Spread Disparate Impact Detector** | Beneficence (Do Good, Avoid Harm) | *Even when lending seems “fair,” who ultimately bears the cost?* | Quantify borrower harm via lifetime cost deltas from rate spreads | EDA → Logit Models → ML Fairness Tests (RF/XGB)  | MVP Completed |
 | **Autonomy & Choice: Nudging AI Toward Good** | Autonomy (Respect for Choice & Human Welfare) | *Can we embed ethical “nudges” into AI reward functions to keep them aligned without hard rules?* | Test nudges as soft constraints on reinforcement learning agents to promote transparency & ethical behavior | RL + Reward Shaping + Behavioral Economics (Nudge Design) | 🚀 New Prototype Added (2025) — see paper *Nudging AI Toward Good* |
 
 ---
