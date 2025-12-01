@@ -38,6 +38,7 @@ respect-cfpb/
 │   └── 03_modeling_topic.ipynb      # Post-hoc clustering + error analysis
 │
 ├── outputs/                # saved model checkpoints & metrics
+├── report/					# final report
 └── README.md
 ```
 ---
